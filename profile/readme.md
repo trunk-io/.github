@@ -1,7 +1,7 @@
 <!-- trunk-ignore(markdownlint/MD041) -->
 <p align="center">
   <a href="https://docs.trunk.io">
-    <img height="300" src="https://user-images.githubusercontent.com/3904462/199616921-7861e331-c774-43bf-8c17-1ecd27d0a750.png" />
+    <img src="https://user-images.githubusercontent.com/3904462/199616921-7861e331-c774-43bf-8c17-1ecd27d0a750.png" />
   </a>
 </p>
 <h2 align="center">Trunk.io</h2>
@@ -25,7 +25,7 @@ Check out:
 
 - [Trunk Merge](https://docs.trunk.io/docs/merge): a merge queue to make merging code in GitHub safer and easier
 - [Trunk Check](https://docs.trunk.io/docs/check): an extensible code quality and security checker and IDE and CI integrations
-- [Trunk Actions](https://docs.trunk.io/docs/actions): workflow automation for software engineers
+- [Trunk CI Analytics](https://trunk.io/products/ci-analytics): live and trend data about the performance and flakiness of your GitHub Actions workflows, jobs, and steps
 
 Use it via:
 
@@ -46,6 +46,8 @@ To use `trunk` locally, run:
 curl https://get.trunk.io -fsSL | bash
 ```
 
+For other installation options (`npm`, `brew`, direct download, etc) and details on exactly what we install or how to uninstall, see the [Install Trunk](https://docs.trunk.io/docs/install) doc.
+
 ### Step 2: Initialize Trunk in a git repo
 
 From the root of a git repo, run:
@@ -53,3 +55,18 @@ From the root of a git repo, run:
 ```bash
 trunk init
 ```
+
+This will bring you into a flow to start getting results from [Trunk Check](https://docs.trunk.io/docs/check). For more details, see [here](https://docs.trunk.io/docs/initialize-trunk-in-a-git-repo).
+
+### Step 3: Sign up for a Trunk account (optional)
+
+[Sign up for a Trunk account](https://app.trunk.io/signup), then run:
+
+```bash
+trunk login
+```
+To use [Trunk Merge](https://docs.trunk.io/docs/merge) and certain other Trunk features, you'll need an account on [trunk.io](https://app.trunk.io), but [Trunk Check](https://docs.trunk.io/docs/check) and [Trunk Actions](https://docs.trunk.io/docs/actions) can be used entirely locally without depending on hosted services or having a Trunk account. 
+
+## Help & Feedback
+
+Join the [Trunk Slack Community](https://slack.trunk.io) for help and to give feedback ([more info](https://docs.trunk.io/docs/community)).
