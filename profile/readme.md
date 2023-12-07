@@ -1,10 +1,9 @@
 <!-- trunk-ignore(markdownlint/MD041) -->
 <p align="center">
   <a href="https://docs.trunk.io">
-    <img src="https://user-images.githubusercontent.com/3904462/199616921-7861e331-c774-43bf-8c17-1ecd27d0a750.png" />
+    <img src="https://github.com/trunk-io/.github/assets/1265982/5e630667-e3f3-43d7-b5db-b6eb40cff04c" />
   </a>
 </p>
-<h2 align="center">Trunk.io</h2>
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=Trunk.io">
     <img src="https://img.shields.io/visual-studio-marketplace/i/Trunk.io?logo=visualstudiocode"/>
@@ -24,7 +23,7 @@ Trunk is a developer experience (DevEx) toolkit that enables you to ship code qu
 Check out:
 
 - [Trunk Merge](https://docs.trunk.io/docs/merge): a merge queue to make merging code in GitHub safer and easier
-- [Trunk Check](https://docs.trunk.io/docs/check): an extensible code quality and security checker and IDE and CI integrations
+- [Trunk Check](https://docs.trunk.io/docs/check): a universal metalinter to run industry leading OSS code quality and security tools in your terminal, IDE and in CI
 - [Trunk CI Analytics](https://trunk.io/products/ci-analytics): live and trend data about the performance and flakiness of your GitHub Actions workflows, jobs, and steps
 
 Use it via:
