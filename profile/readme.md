@@ -1,18 +1,18 @@
 <!-- trunk-ignore(markdownlint/MD041) -->
 <p align="center">
   <a href="https://docs.trunk.io">
-    <img src="https://github.com/trunk-io/.github/assets/1265982/5e630667-e3f3-43d7-b5db-b6eb40cff04c" />
+    <img alt="Trunk.io docs" src="https://github.com/trunk-io/.github/assets/1265982/5e630667-e3f3-43d7-b5db-b6eb40cff04c" />
   </a>
 </p>
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=Trunk.io">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/Trunk.io?logo=visualstudiocode"/>
+    <img alt="Visual Studio Marketplace Installs" src="https://img.shields.io/visual-studio-marketplace/i/Trunk.io?label=vscode">
   </a>
   <a href="https://slack.trunk.io">
-    <img src="https://img.shields.io/badge/slack-slack.trunk.io-blue?logo=slack"/>
+    <img alt="Trunk Community Slack" src="https://img.shields.io/badge/slack-slack.trunk.io-blue?logo=slack"/>
   </a>
   <a href="https://docs.trunk.io">
-    <img src="https://img.shields.io/badge/docs.trunk.io-7f7fcc?label=docs&logo=readthedocs&labelColor=555555&logoColor=ffffff"/>
+    <img alt="Trunk.io docs" src="https://img.shields.io/badge/docs.trunk.io-7f7fcc?label=docs&logo=readthedocs&labelColor=555555&logoColor=ffffff"/>
   </a>
 </p>
 
