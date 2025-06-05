@@ -22,10 +22,9 @@ Trunk is a developer experience (DevEx) toolkit that enables you to ship code qu
 
 Check out:
 
-- [Trunk Merge](https://docs.trunk.io/merge-queue): a merge queue to make merging code in GitHub safer and easier
-- [Trunk Check](https://docs.trunk.io/code-quality): a universal metalinter to run industry leading OSS code quality and security tools in your terminal, IDE and in CI
-- [Trunk CI Analytics (Beta)](https://trunk.io/ci-analytics): live and trend data about the performance and flakiness of your GitHub Actions workflows, jobs, and steps
 - [Trunk Flaky Tests (Beta)](https://trunk.io/flaky-tests): detects, quarantines, and eliminates flaky tests from your code base
+- [Trunk Merge Queue](https://docs.trunk.io/merge-queue): a merge queue to make merging code in GitHub safer and easier
+- [Trunk Code Quality](https://docs.trunk.io/code-quality): a universal metalinter to run industry leading OSS code quality and security tools in your terminal, IDE and in CI
 
 Use it via:
 
