@@ -24,7 +24,7 @@ Teams typically start with whichever problem is more urgent, then expand as thei
 
 <details>
 
-<summary>Want to see how it works? Have questions? </summary>
+<summary>Want to see how it works? Have questions?</summary>
 
 [Schedule time here](https://calendly.com/trunk/demo) or email <support@trunk.io>
 
@@ -54,39 +54,41 @@ In merge queues, each flaky failure blocks multiple PRs—turning minor issues i
 
 #### Merge Queue
 
-* **Parallel queues**: Analyzes which code each PR touches to create independent test lanes for non-overlapping changes—transforming queue bottlenecks from a single line into an efficient graph where unrelated PRs test simultaneously
-* **Intelligent batching with bisection**: Test multiple PRs together in a single CI run (reducing costs up to 90%), with automatic bisection to isolate failures without ejecting entire batches. Caseware processes 4-8 PRs per batch with zero manual intervention, reducing their median merge time from 6 hours to 90 minutes
-* **Scale-tested reliability**: Validated at 250+ PRs/hour over 24-hour periods (6,000+ PRs/day)&#x20;
-* **Anti-flake protection**: Failed PRs get additional chances to pass as later PRs retest their code—if subsequent PRs (that include the failed code) pass, all merge together without blocking the queue. Combines Optimistic Merging and Pending Failure Depth
-* **Predictive testing**: Tests each PR against the predicted future state of main (including all PRs ahead in queue), guaranteeing branch stability without endless rebase-retest loops. Faire prevented 20% of main branch failures from green-green conflicts
-* **API & webhook integrations**: Submit PRs programmatically, build custom merge bot, or trigger workflows on queue events. Faire built custom Chrome extensions and automation services using the API to handle unique deployment workflows
+* **Parallel queues**: Analyzes which code each PR touches to create independent test lanes for non-overlapping changes—transforming queue bottlenecks from a single line into an efficient graph where unrelated PRs test simultaneously.
+* **Intelligent batching with bisection**: Test multiple PRs together in a single CI run (reducing costs up to 90%), with automatic bisection to isolate failures without ejecting entire batches. Caseware processes 4-8 PRs per batch with zero manual intervention, reducing their median merge time from 6 hours to 90 minutes.
+* **Scale-tested reliability**: Validated at 250+ PRs/hour over 24-hour periods (6,000+ PRs/day).
+* **Anti-flake protection**: Failed PRs get additional chances to pass as later PRs retest their code—if subsequent PRs (that include the failed code) pass, all merge together without blocking the queue. Combines Optimistic Merging and Pending Failure Depth.
+* **Predictive testing**: Tests each PR against the predicted future state of main (including all PRs ahead in queue), guaranteeing branch stability without endless rebase-retest loops. Faire prevented 20% of main branch failures from green-green conflicts.
+* **API & webhook integrations**: Submit PRs programmatically, build custom merge bot, or trigger workflows on queue events. Faire built custom Chrome extensions and automation services using the API to handle unique deployment workflows.
 
 #### Flaky Tests
 
-* **Branch-aware detection**: Analyzes test failures differently on main, PRs, and merge queues—a test showing inconsistent results on the same commit gets flagged as flaky, while expected failures during PR development don't trigger false positives
-* **No-code quarantine**: Quarantine flaky tests through the dashboard without touching source code or navigating merge queues—eliminating the recursive nightmare of merging test fixes through an already-broken pipeline. With auto-quarantine enabled, tests flagged as flaky are automatically isolated while continuing to run and collect data for prioritization. Zillow achieved zero pipeline blockages from known flaky tests
-* **Continuous analysis**: Analyzes every pipeline execution (not just periodic sampling) to detect patterns across your entire organization—see whether a test flaked once or 45 times today, preventing developers from "gaslighting themselves" about whether failures are related to their code
-* **AI-powered debugging**: Summarizes errors and identifies patterns across aggregated failures to drastically reduce diagnostic time, especially for issues that can't be reproduced locally due to CI environment differences
-* **In-PR visibility**: Flaky test information surfaces directly in pull request comments, providing immediate feedback without leaving your code review workflow. Metabase uses this alongside webhook integrations to automatically create Linear tickets for tracking and prioritization
+* **Branch-aware detection**: Analyzes test failures differently on main, PRs, and merge queues—a test showing inconsistent results on the same commit gets flagged as flaky, while expected failures during PR development don't trigger false positives.
+* **No-code quarantine**: Quarantine flaky tests through the dashboard without touching source code or navigating merge queues—eliminating the recursive nightmare of merging test fixes through an already-broken pipeline. With auto-quarantine enabled, tests flagged as flaky are automatically isolated while continuing to run and collect data for prioritization. Zillow achieved zero pipeline blockages from known flaky tests.
+* **Continuous analysis**: Analyzes every pipeline execution (not just periodic sampling) to detect patterns across your entire organization—see whether a test flaked once or 45 times today, preventing developers from "gaslighting themselves" about whether failures are related to their code.
+* **AI-powered debugging**: Summarizes errors and identifies patterns across aggregated failures to drastically reduce diagnostic time, especially for issues that can't be reproduced locally due to CI environment differences.
+* **In-PR visibility**: Flaky test information surfaces directly in pull request comments, providing immediate feedback without leaving your code review workflow. Metabase uses this alongside webhook integrations to automatically create Linear tickets for tracking and prioritization.
 
-## Trusted by Zillow, Brex, Faire, Waabi, Motional, Metabase, Google[x], Descript and others.
+## Trusted by
+
+Zillow, Brex, Faire, Waabi, Motional, Metabase, Google[x], Descript, and others.
 
 ### Technical Details
 
 #### Works With Your Stack
 
-* **CI-agnostic**: GitHub Actions, GitLab CI, Jenkins, BuildKite, CircleCI, Azure DevOps, and any other CI provider—integrates via CLI that uploads test results from your existing pipelines
-* **Language-agnostic**: Go, TypeScript, Python, Swift, Java, Kotlin, Ruby, Solidity, Rust, and any other language—works by analyzing test output formats (JUnit XML, XCTest, etc.), not your source code
-* **Test framework-agnostic**: Jest, Pytest, XCTest, Cypress, Playwright, RSpec, JUnit, GoogleTest, and 25+ other frameworks—if your test runner can produce structured output, Trunk can analyze it
-* **Build system support**: Native integrations for Bazel, Nx, and Gradle to calculate impacted targets for parallel merge queues, with API for custom build systems
+* **CI-agnostic**: GitHub Actions, GitLab CI, Jenkins, BuildKite, CircleCI, Azure DevOps, and any other CI provider—integrates via CLI that uploads test results from your existing pipelines.
+* **Language-agnostic**: Go, TypeScript, Python, Swift, Java, Kotlin, Ruby, Solidity, Rust, and any other language—works by analyzing test output formats (JUnit XML, XCTest, etc.), not your source code.
+* **Test framework-agnostic**: Jest, Pytest, XCTest, Cypress, Playwright, RSpec, JUnit, GoogleTest, and 25+ other frameworks—if your test runner can produce structured output, Trunk can analyze it.
+* **Build system support**: Native integrations for Bazel, Nx, and Gradle to calculate impacted targets for parallel merge queues, with API for custom build systems.
 
 #### Integration Points
 
-* **Merge Queue API**: Submit PRs with custom priorities, cancel/restart tests, set impacted targets for parallel queues, query queue state and PR readiness, update queue state (RUNNING/PAUSED/DRAINING)—build custom merge bots and automation workflows
-* **Flaky Tests API**: List quarantined/unhealthy tests (filter by FLAKY/BROKEN), link Jira/Linear tickets to test cases, fetch test metadata (failure rates, common failures, codeowners, PR impact)—integrate into local dev environments, dashboards, or CI/CD pipelines
-* **Webhooks**: Subscribe to PR events (`submitted`, `queued`, `testing`, `merged`, `failed`, `canceled`), batch events (`pull_request_batch.merged`), and test events (`status_changed`, `quarantining_setting_changed`)—trigger custom workflows with Svix transformations (filter by PR impact, format for Slack/Teams/GitHub Issues, auto-assign via CODEOWNERS)
-* **CLI**: Platform-agnostic `trunk` CLI uploads test results (JUnit XML, Bazel BEP, XCResult), validates reports locally, wraps test commands to override exit codes for quarantined tests, manages merge queue operations (submit/cancel/status/pause)
-* **Native integrations**: Slack notifications for Merge Queue events (PR state changes, queue updates) and Flaky Test webhooks; Jira & Linear ticket creation with auto-generated descriptions, configurable labels/assignees, and API linking for existing tickets
+* **Merge Queue API**: Submit PRs with custom priorities, cancel/restart tests, set impacted targets for parallel queues, query queue state and PR readiness, update queue state (RUNNING/PAUSED/DRAINING)—build custom merge bots and automation workflows.
+* **Flaky Tests API**: List quarantined/unhealthy tests (filter by FLAKY/BROKEN), link Jira/Linear tickets to test cases, fetch test metadata (failure rates, common failures, codeowners, PR impact)—integrate into local dev environments, dashboards, or CI/CD pipelines.
+* **Webhooks**: Subscribe to PR events (`submitted`, `queued`, `testing`, `merged`, `failed`, `canceled`), batch events (`pull_request_batch.merged`), and test events (`status_changed`, `quarantining_setting_changed`)—trigger custom workflows with Svix transformations (filter by PR impact, format for Slack/Teams/GitHub Issues, auto-assign via CODEOWNERS).
+* **CLI**: Platform-agnostic `trunk` CLI uploads test results (JUnit XML, Bazel BEP, XCResult), validates reports locally, wraps test commands to override exit codes for quarantined tests, manages merge queue operations (submit/cancel/status/pause).
+* **Native integrations**: Slack notifications for Merge Queue events (PR state changes, queue updates) and Flaky Test webhooks; Jira & Linear ticket creation with auto-generated descriptions, configurable labels/assignees, and API linking for existing tickets.
 
 ### Why Teams Choose Trunk Over Alternatives
 
@@ -139,7 +141,9 @@ Trunk is a hosted service. Start by creating an account, then integrate the prod
 * **Access Control**: MFA required for sensitive systems, principle of least privilege, access logging and monitoring
 * **Security Testing**: Quarterly vulnerability scans, annual third-party penetration tests
 * **Data Retention**: Test results retained for 45 days for historical flakiness analysis
-* **What we don't access**: Source code (only test results and CI metadata), secrets, environment variables, customer data## Learn More
+* **What we don't access**: Source code (only test results and CI metadata), secrets, environment variables, customer data
+
+## Learn More
 
 **Website**: [trunk.io](https://trunk.io)
 
