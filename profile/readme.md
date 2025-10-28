@@ -1,14 +1,30 @@
 <!-- trunk-ignore(markdownlint/MD041) -->
+<style>
+  .btn {
+    display: inline-block;
+    margin: 2px 4px;
+    padding: 6px 12px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .btn-docs { background-color: #7f7fcc; }
+  .btn-signup { background-color: #28a745; }
+  .btn-login { background-color: #007bff; }
+  .btn-demo { background-color: #f59e0b; }
+</style>
 <p align="center">
   <a href="https://docs.trunk.io">
     <img src="https://raw.githubusercontent.com/trunk-io/.github/main/images/trunk-keep-ci-green.png" alt="Trunk Keep CI Green" />
   </a>
 </p>
 <p align="center">
-  <a href="https://docs.trunk.io/" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #7f7fcc; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Read the docs</a>
-  <a href="https://app.trunk.io/signup" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Sign up for free</a>
-  <a href="https://app.trunk.io/login" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Log in</a>
-  <a href="https://calendly.com/trunk/demo" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #f59e0b; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Get a demo</a>
+  <a href="https://docs.trunk.io/" class="btn btn-docs">Read the docs</a>
+  <a href="https://app.trunk.io/signup" class="btn btn-signup">Sign up for free</a>
+  <a href="https://app.trunk.io/login" class="btn btn-login">Log in</a>
+  <a href="https://calendly.com/trunk/demo" class="btn btn-demo">Get a demo</a>
 </p>
 
 # Trunk Platform
