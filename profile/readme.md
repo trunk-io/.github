@@ -16,57 +16,128 @@
   </a>
 </p>
 
-## What is Trunk?
+# Trunk: Keep Your CI Green
 
-Trunk is a developer experience (DevEx) toolkit that enables you to ship code quickly while maintaining the guardrails necessary for a large team. Use Trunk for checking, testing, merging, and monitoring your code.
+**CI reliability platform for high-velocity engineering teams**
 
-Check out:
+Modern build systems (Bazel, Nx, Gradle) give you parallelization and caching. But at scale, two critical bottlenecks emerge that break everything else:
 
-- [Trunk Flaky Tests (Beta)](https://trunk.io/flaky-tests): detects, quarantines, and eliminates flaky tests from your code base
-- [Trunk Merge Queue](https://docs.trunk.io/merge-queue): a merge queue to make merging code in GitHub safer and easier
-- [Trunk Code Quality](https://docs.trunk.io/code-quality): a universal metalinter to run industry leading OSS code quality and security tools in your terminal, IDE and in CI
+## The Problems We Solve
 
-Use it via:
+### 1. Merge Queue Bottlenecks
 
-- [Trunk CLI](https://docs.trunk.io/cli)
-- [VSCode Extension](https://docs.trunk.io/code-quality/ide-integration)
-- [GitHub Action](https://docs.trunk.io/code-quality/ci-setup/manual-setup)
-- [Web App (app.trunk.io)](https://app.trunk.io)
+**Without a merge queue:** Independently-passing PRs break `main` when they conflict.
 
-Trunk is entirely free for use in public repos.
+**With a traditional merge queue:** You've solved stability but created a serial processing bottleneck. PRs test one-at-a-time in a single queue, so frontend changes wait behind unrelated backend tests. Queue wait times grow linearly with PR volume.
 
-## Get Started
+At 150+ PRs/day, this becomes a disaster. At 3,000 PRs/day, it's completely unworkable.
 
-### Step 1: Install Trunk
+### 2. Flaky Test Multiplication
 
-To use `trunk` locally, run:
+At tens of thousands of tests, even a 1% flake rate means false failures on every test run.
 
-```bash
-curl https://get.trunk.io -fsSL | bash
-```
+In merge queues, each flaky failure blocks multiple PRs—turning minor issues into major bottlenecks. Worse, when developers know there's a chance a re-run will pass, they stop trusting test failures altogether.
 
-For other installation options (`npm`, `brew`, direct download, etc) and details on exactly what we install or how to uninstall, see the [Install Trunk](https://docs.trunk.io/code-quality/setup-and-installation) doc.
+## Our Solution
 
-### Step 2: Initialize Trunk in a git repo
+**Graph-based parallel merge lanes** that test non-overlapping changes simultaneously while guaranteeing `main` stability, plus **automated flaky test detection and quarantine** that prevents false failures from blocking your pipeline.
 
-From the root of a git repo, run:
+### Merge Queue
 
-```bash
-trunk init
-```
+- **Parallel queues**: Analyzes which code each PR touches to create independent test lanes for non-overlapping changes—transforming queue bottlenecks in large monorepos from a single line into an efficient graph where unrelated PRs test simultaneously
+- **Intelligent batching with bisection**: Test multiple PRs together in a single CI run (reducing costs up to 90%), with automatic bisection to isolate failures without ejecting entire batches—Caseware processes 4-8 PRs per batch with zero manual intervention
+- **Anti-flake protection**: Combines Optimistic Merging and Pending Failure Depth so failed PRs get additional chances to pass as later PRs retest their code—if subsequent PRs (that include the failed code) pass, all merge together without blocking the queue
+- **Scale-tested**: Validated performance floor of 250+ PRs/hour over 12-hour periods (3,000+ PRs/day)—Caseware reduced median merge time from 6 hours to 90 minutes while handling 50-60 daily PRs at peak
+- **Predictive testing eliminates race conditions**: Tests each PR against the predicted future state of main (including all PRs ahead of it in queue), guaranteeing branch stability without endless rebase-retest loops—prevented 20% of Faire's main branch failures from green-green conflicts
+- **API & webhook integrations**: Submit PRs programmatically with custom priorities, build merge bots, or trigger workflows on queue events (submitted, testing, merged, failed)—Faire built custom Chrome extensions and automation services using the API to handle their unique deployment workflows
 
-This will bring you into a flow to start getting results from [Trunk Check](https://docs.trunk.io/code-quality). For more details, see [here](https://docs.trunk.io/code-quality/setup-and-installation).
+### Flaky Tests
 
-### Step 3: Sign up for a Trunk account (optional)
+- **Branch-aware detection**: Analyzes test failures differently on main, PRs, and merge queues—a test showing inconsistent results on the same commit gets flagged as flaky, while expected failures during PR development don't trigger false positives
+- **No-code quarantine**: Quarantine flaky tests through the dashboard without touching source code or navigating merge queues—with auto-quarantine enabled, tests flagged as flaky are automatically isolated while continuing to run and collect data for prioritization
+- **Continuous analysis**: Analyzes every pipeline execution (not just periodic sampling) to detect patterns across your entire organization—see whether a test flaked once or 45 times today, preventing developers from questioning if failures are their fault
+- **AI-powered debugging**: Summarizes errors and identifies patterns across aggregated failures to drastically reduce diagnostic time, especially for issues that can't be reproduced locally due to CI environment differences
+- **Webhook & API integrations**: Automate custom workflows like creating Linear/Jira tickets when tests become flaky, or sync quarantined tests to local dev environments—build integrations for your specific needs beyond out-of-the-box options
 
-[Sign up for a Trunk account](https://app.trunk.io/signup), then run:
+### CI Autopilot (Beta)
 
-```bash
-trunk login
-```
+AI-powered root cause analysis that automatically identifies and explains test and CI failures. Delivers actionable insights directly in GitHub PR comments and Slack, including failure classification, impact assessment, and suggested fixes.
 
-To use [Trunk Merge](https://docs.trunk.io/merge) and certain other Trunk features, you'll need an account on [trunk.io](https://app.trunk.io), but [Trunk Check](https://docs.trunk.io/docs/code-quality) and [Trunk Actions](https://docs.trunk.io/cli/getting-started/actions) can be used entirely locally without depending on hosted services or having a Trunk account.
+## Trusted by
 
-## Help & Feedback
+Zillow, Brex, Faire, Caseware, Metabase, Descript, Handshake, Glydways, Waabi
 
-Join the [Trunk Slack Community](https://slack.trunk.io) for help and to give feedback ([more info](https://docs.trunk.io/administration/community)).
+## Technical Details
+
+### Works With Your Stack
+
+* **CI-agnostic**: GitHub Actions, GitLab CI, Jenkins, BuildKite, CircleCI, Azure DevOps, and any other CI provider—integrates via CLI that uploads test results from your existing pipelines
+* **Language-agnostic**: Go, TypeScript, Python, Swift, Java, Kotlin, Ruby, Solidity, Rust, and any other language—works by analyzing test output formats (JUnit XML, XCTest, etc.), not your source code
+* **Test framework-agnostic**: Jest, Pytest, XCTest, Cypress, Playwright, RSpec, JUnit, GoogleTest, and 25+ other frameworks—if your test runner can produce structured output, Trunk can analyze it
+* **Build system support**: Native integrations for Bazel, Nx, and Gradle to calculate impacted targets for parallel merge queues, with API for custom build systems
+
+### Integration Points
+
+- **Merge Queue API**: Submit PRs with custom priorities (0-255), cancel PRs, restart tests, set impacted targets for parallel queues, query queue state—build custom merge bots and automation workflows
+- **Flaky Tests API**: Fetch quarantined or unhealthy tests, check service status—integrate quarantine status into local dev environments or custom dashboards
+- **Webhooks**: Subscribe to events like `pull_request.merged`, `pull_request.failed`, `test_case.quarantining_setting_changed`—trigger custom workflows, notifications, or ticket creation (powered by Svix)
+- **CLI**: Platform-agnostic `trunk` CLI that uploads test results (JUnit XML, Bazel BEP, XCResult), validates reports locally, wraps test commands to override exit codes for quarantined tests, and manages merge queue operations (submit/cancel/status/pause)
+- **Native integrations**: Slack notifications for queue status and flaky test alerts, Jira & Linear ticket creation for flaky tests
+
+## Why Teams Choose Trunk Over Alternatives
+
+**vs. Basic Merge Queues (GitHub native, Bors)**
+- **Sequential bottlenecks**: Basic queues test PRs one-at-a-time. At 100+ PRs/day, frontend changes wait hours behind unrelated backend tests. Trunk's parallel processing tests independent changes simultaneously.
+- **No flake protection**: One flaky test blocks multiple PRs in the queue. Trunk's anti-flake protection prevents false failures from cascading.
+- **Missing cost optimization**: Running full CI for every PR combination is expensive. Trunk's intelligent batching reduces CI costs by up to 90%.
+
+**vs. Observability Platforms (Datadog, etc.)**
+- **Flaky test detection isn't their core focus**: General observability tools bolt on test analytics. Trunk is purpose-built for CI reliability with transparent detection showing exactly why each test is classified as flaky.
+- **Black-box vs. active analysis**: Observability platforms stop running quarantined tests, hiding the problem. Trunk continues running them for root cause analysis—you see the data you need to actually fix issues.
+- **Disconnected tools**: Using separate vendors for flaky tests, merge queues, and CI debugging means integration overhead and finger-pointing.
+
+**vs. Building In-House**
+- **Data engineering at scale**: Processing 50k-100k tests per run requires real-time ETL pipelines, specialized storage, and classification algorithms to identify flaky vs. broken tests—then surfacing that data in high-performance UIs engineers actually use.
+- **Complex coordination problems**: At 100+ PRs/day, you need parallel graph computation, bisection algorithms to isolate failures in batched PRs, intelligent restarts to recompute predicted main state, and robust GitHub API orchestration. These aren't one-time problems to solve.
+- **Operational risk on mission-critical infrastructure**: Merge queues block your entire team when they fail. If the engineers who built your system leave, you're maintaining complex infrastructure in your deployment path without the knowledge to fix it.
+- **Opportunity cost**: Every sprint on merge queue or flaky test tooling is a sprint not building features that differentiate your product.
+
+
+## Getting Started
+
+Trunk is a hosted service. Start by creating an account, then integrate the product that solves your most urgent problem.
+
+### 1. Sign Up
+
+[Create a Trunk account →](https://app.trunk.io/signup)
+
+### 2. Integrate
+
+**Start with Flaky Tests** if you're dealing with unreliable tests blocking CI:
+- [Flaky Tests Integration Guide](https://docs.trunk.io/flaky-tests/get-started)
+
+**Start with Merge Queue** if you're dealing with merge bottlenecks:
+- [Merge Queue Setup Guide](https://docs.trunk.io/merge-queue/set-up-trunk-merge)
+
+### Support
+
+- **Direct engineering support**: We maintain Slack Connect or MS Teams channels with most of our customers. This direct line of communication with our engineers is one of the key benefits of working with Trunk—whether you're debugging a production issue or need help optimizing your setup. Email [support@trunk.io](mailto:support@trunk.io) to get started.
+- **Documentation**: [docs.trunk.io](https://docs.trunk.io)
+
+### Security & Compliance
+
+- **SOC 2 Type II Certified**: Independently audited controls for security, availability, and confidentiality—[request report](mailto:security@trunk.io)
+- **Encryption**: TLS/HSTS for data in transit, AES-256 for data at rest
+- **Infrastructure**: AWS-hosted in secure U.S. data centers with network isolation (private VPCs, no direct internet access)
+- **Access Control**: MFA required for sensitive systems, principle of least privilege, access logging and monitoring
+- **Security Testing**: Quarterly vulnerability scans, annual third-party penetration tests
+- **Data Retention**: Test results retained for 45 days for historical flakiness analysis
+- **What we don't access**: Source code (only test results and CI metadata), secrets, environment variables, customer data
+
+## Learn More
+
+**Website**: [trunk.io](https://trunk.io)
+
+---
+
+**Built for teams shipping at scale.** Trusted by engineering organizations running 150,000+ tests and merging 100+ PRs/hour.
