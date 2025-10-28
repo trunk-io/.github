@@ -1,7 +1,7 @@
 <!-- trunk-ignore(markdownlint/MD041) -->
 <p align="center">
   <a href="https://docs.trunk.io">
-    <img src="https://github.com/trunk-io/.github/assets/1265982/5e630667-e3f3-43d7-b5db-b6eb40cff04c" />
+    <img src="https://raw.githubusercontent.com/trunk-io/.github/main/images/trunk-keep-ci-green.png" alt="Trunk Keep CI Green" />
   </a>
 </p>
 <p align="center">
