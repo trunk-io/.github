@@ -5,15 +5,10 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=Trunk.io">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/Trunk.io?logo=visualstudiocode"/>
-  </a>
-  <a href="https://slack.trunk.io">
-    <img src="https://img.shields.io/badge/slack-slack.trunk.io-blue?logo=slack"/>
-  </a>
-  <a href="https://docs.trunk.io">
-    <img src="https://img.shields.io/badge/docs.trunk.io-7f7fcc?label=docs&logo=readthedocs&labelColor=555555&logoColor=ffffff"/>
-  </a>
+  <a href="https://docs.trunk.io/" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #7f7fcc; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Read the docs</a>
+  <a href="https://app.trunk.io/signup" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Sign up for free</a>
+  <a href="https://app.trunk.io/login" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Log in</a>
+  <a href="https://calendly.com/trunk/demo" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #f59e0b; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Get a demo</a>
 </p>
 
 # Trunk: Keep Your CI Green
