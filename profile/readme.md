@@ -6,10 +6,10 @@
 </p>
 <p align="center">
   <!-- Note: GitHub strips <style> tags, so inline styles are required for custom button appearance -->
-  <a href="https://docs.trunk.io/" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #7f7fcc; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Read the docs</a>
-  <a href="https://app.trunk.io/signup" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Sign up for free</a>
-  <a href="https://app.trunk.io/login" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Log in</a>
-  <a href="https://calendly.com/trunk/demo" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #f59e0b; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Get a demo</a>
+  <a href="https://docs.trunk.io/" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #3737a8; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Read the docs</a>
+  <a href="https://app.trunk.io/signup" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #218838; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Sign up for free</a>
+  <a href="https://app.trunk.io/login" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #0056b3; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Log in</a>
+  <a href="https://calendly.com/trunk/demo" style="display: inline-block; margin: 2px 4px; padding: 6px 12px; background-color: #b45309; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: 500;">Get a demo</a>
 </p>
 
 # Trunk Platform
