@@ -60,7 +60,7 @@ In merge queues, each flaky failure blocks multiple PRs—turning minor issues i
 * **Scale-tested reliability**: Validated at 250+ PRs/hour over 24-hour periods (6,000+ PRs/day).
 * **Anti-flake protection**: Failed PRs get additional chances to pass as later PRs retest their code—if subsequent PRs (that include the failed code) pass, all merge together without blocking the queue. Combines Optimistic Merging and Pending Failure Depth.
 * **Predictive testing**: Tests each PR against the predicted future state of main (including all PRs ahead in queue), guaranteeing branch stability without endless rebase-retest loops. Faire prevented 20% of main branch failures from green-green conflicts.
-* **API & webhook integrations**: Submit PRs programmatically, build custom merge bot, or trigger workflows on queue events. Faire built custom Chrome extensions and automation services using the API to handle unique deployment workflows.
+* **API & webhook integrations**: Submit PRs programmatically, build custom merge bots, or trigger workflows on queue events. Faire built custom Chrome extensions and automation services using the API to handle unique deployment workflows.
 
 #### Flaky Tests
 
